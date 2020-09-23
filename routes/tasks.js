@@ -6,7 +6,7 @@ const TasksModel = require('../models/tasksModel');
 
 router.get('/', async (req, res) => {
     const taskData = await TasksModel.getItems(req.session.user_id);
-    const taskDoneData = await TasksModel.getDoneItems(req.session.id);
+    const taskDoneData = await TasksModel.getDoneItems(req.session.user_id);
     console.log(taskDoneData);
     res.render('template', {
         locals: {
