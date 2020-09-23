@@ -43,5 +43,9 @@ server.listen(port, hostname, () => {
 
 
 const loginController = require('./routes/index');
+const usersController = require('./routes/users');
+const tasksConroller = require('./routes/tasks');
 
 app.use('/', loginController);
+app.use('/users', usersController);
+app.use('/tasks', tasksConroller);

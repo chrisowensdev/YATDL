@@ -1,0 +1,36 @@
+${!!is_logged_in ? `
+<a href="/users/logout">Logout</a>
+` : `
+<a href="/users/login">Login</a>
+`
+}
+
+<h1>${title}</h1>
+
+<h3>Add Task</h3>
+<form action="/tasks" method="POST">
+    <input type="hidden" value="1">
+    <label>Add Item
+        <input type="text" name="task_name">
+    </label>
+    <button type="submit">Add Item</button>
+
+</form>
+${data.map(task => {
+return `
+<p>${task.task_name}
+    <form action="/tasks/done" method="POST">
+        <input type="hidden" name="id" value=${task.id}>
+        <button type="submit">Done</button>
+    </form>
+</p>
+`
+}).join('')}
+
+
+<h2>Tasks Done</h2>
+${doneData.map(task => {
+return `
+<p>${task.task_name}</p>
+`
+}).join('')}

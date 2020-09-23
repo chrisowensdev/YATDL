@@ -17,7 +17,7 @@ class User {
 
     async save() {
         try {
-            const response = await db.one(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3, $4) RETURNING id;`, [this.name, this.email, this.password]);
+            const response = await db.one(`INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING id;`, [this.name, this.email, this.password]);
             console.log("User was created with ID:", response.id);
             return response;
         } catch (error) {
@@ -28,11 +28,11 @@ class User {
 
     async login() {
         try {
-            const response = await db.one(`SELECT id, name, email, password FROM reviewers WHERE email = $1;`, [this.email]);
+            const response = await db.one(`SELECT id, name, email, password FROM users WHERE email = $1;`, [this.email]);
             const isValid = await this.checkPassword(response.password);
             if (!!isValid) {
                 const {
-                    first_name,
+                    name,
                     id
                 } = response;
                 return {
