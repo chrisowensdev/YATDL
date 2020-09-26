@@ -18,3 +18,7 @@ body {
 input {
     padding: 5px;
 }
+
+input:focus {
+    outline: none;
+}
